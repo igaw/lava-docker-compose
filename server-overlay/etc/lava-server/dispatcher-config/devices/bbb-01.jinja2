@@ -1,0 +1,9 @@
+{% extends 'beaglebone-black.jinja2' %}
+{% set connection_command = 'telnet lithium.lan 1951' %}
+{% set hard_reset_command = 'pwctrl 1 reset' %}
+{% set power_off_command = 'pwctrl 1 off' %}
+{% set power_on_command = 'pwctrl 1 on' %}
+{% set interrupt_char = '\n' %}
+{% set interrupt_prompt = 'Press SPACE to abort autoboot' %}
+{% set bootloader_prompt = '=>' %}
+{% set extra_nfsroot_args = ',vers=3' %}

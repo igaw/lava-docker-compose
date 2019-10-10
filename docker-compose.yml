@@ -34,6 +34,7 @@ services:
       - ./server-overlay/etc/lava-server/instance.conf:/etc/lava-server/instance.conf
       - ./server-overlay/etc/lava-server/dispatcher-config/health-checks:/etc/lava-server/dispatcher-config/health-checks
       - ./server-overlay/etc/lava-server/dispatcher-config/devices:/etc/lava-server/dispatcher-config/devices
+      - ./server-overlay/etc/lava-server/dispatcher.d/dispatcher.yaml:/etc/lava-server/dispatcher.d/dispatcher.yaml
       - ./server-overlay/etc/lava-server/env.yaml:/etc/lava-server/env.yaml
 
       # provisioning script to add users and boards
@@ -57,6 +58,21 @@ services:
     volumes:
       - '/boot:/boot:ro'
       - '/lib/modules:/lib/modules:ro'
+
+      # map tftp and nfs dirs into the container (lava needs 1:1 mapping)
+      - '/srv/tftp:/srv/tftp'
+      - '/var/lib/lava/dispatcher/tmp:/var/lib/lava/dispatcher/tmp'
+
+      # config
+      - ./dispatcher-overlay/etc/lava-dispatcher/lava-slave:/etc/lava-dispatcher/lava-slave
+
+      # tools
+      - ./dispatcher-overlay/usr/bin/pwctrl:/usr/bin/pwctrl
+    extra_hosts:
+      - "pwctrl-0.lan:192.168.19.3"
+      - "bbb.lan:192.168.19.51"
+      - "c2d.lan:192.168.19.52"
+      - "rpi3.lan:192.168.19.53"
 
 volumes:
   # postgres data volume

@@ -1,0 +1,30 @@
+{# set device_type = "bcm2837-rpi-3-b" #}
+{% extends 'base-uboot.jinja2' %}
+
+{% set uboot_mkimage_arch = 'arm64' %}
+
+{% set uboot_needs_usb = true %}
+
+{% set extra_kernel_args = "earlycon=uart8250,mmio32,0x3f215040" %}
+
+{% set boot_character_delay = 10 %}
+{% set test_character_delay = 10 %}
+
+{% set connection_command = 'telnet lithium.lan 1953' %}
+{% set hard_reset_command = 'pwctrl 3 reset' %}
+{% set power_off_command = 'pwctrl 3 off' %}
+{% set power_on_command = 'pwctrl 3 on' %}
+{% set interrupt_char = '\n' %}
+{% set interrupt_prompt = 'Hit any key to stop autoboot' %}
+{% set bootloader_prompt = 'U-Boot>' %}
+{% set extra_nfsroot_args = ',vers=3' %}
+
+{% set bootm_kernel_addr = '0x00080000' %}
+{% set bootm_ramdisk_addr = '0x24000000' %}
+{% set bootm_dtb_addr = '0x02600000' %}
+{% set bootz_kernel_addr = bootm_kernel_addr %}
+{% set bootz_ramdisk_addr = bootm_ramdisk_addr %}
+{% set bootz_dtb_addr = bootm_dtb_addr %}
+{% set booti_kernel_addr = bootm_kernel_addr %}
+{% set booti_ramdisk_addr = bootm_ramdisk_addr %}
+{% set booti_dtb_addr = bootm_dtb_addr %}

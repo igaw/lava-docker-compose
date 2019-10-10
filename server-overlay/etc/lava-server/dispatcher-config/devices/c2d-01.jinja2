@@ -1,0 +1,9 @@
+{% extends 'x86.jinja2' %}
+{% set connection_command = 'telnet lithium.lan 1952' %}
+{% set hard_reset_command = 'pwctrl 2 reset' %}
+{% set power_off_command = 'pwctrl 2 off' %}
+{% set power_on_command = 'pwctrl 2 on' %}
+{% set extra_nfsroot_args = ',vers=3' %}
+{% set lava_mac_address = 'b8:ae:ed:74:f9:68' %}
+{% set boot_character_delay = 10 %}
+{% set test_character_delay = 10 %}
